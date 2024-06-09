@@ -5,6 +5,8 @@ import { ThemeProvider } from "components/material-tailwind-theme-provider";
 import ReactQueryClientProviders from "config/ReactQueryClientProvider";
 import Header from "components/header";
 import Footer from "components/footer";
+import { RecoilRoot } from "recoil";
+import RecoilProvider from "config/RecoilProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,26 +17,28 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <ReactQueryClientProviders>
-      <ThemeProvider>
-        {/* @ts-ignore */}
-        <html lang="en">
-          <head>
-            <link
-              rel="stylesheet"
-              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
-              integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
-              crossOrigin="anonymous"
-              referrerPolicy="no-referrer"
-            />
-          </head>
-          <body className={inter.className}>
-            <Header />
-            {children}
-            <Footer />
-          </body>
-        </html>
-      </ThemeProvider>
-    </ReactQueryClientProviders>
+    <RecoilProvider>
+      <ReactQueryClientProviders>
+        <ThemeProvider>
+          {/* @ts-ignore */}
+          <html lang="en">
+            <head>
+              <link
+                rel="stylesheet"
+                href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+                integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+                crossOrigin="anonymous"
+                referrerPolicy="no-referrer"
+              />
+            </head>
+            <body className={inter.className}>
+              <Header />
+              {children}
+              <Footer />
+            </body>
+          </html>
+        </ThemeProvider>
+      </ReactQueryClientProviders>
+    </RecoilProvider>
   );
 }
